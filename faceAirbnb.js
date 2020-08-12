@@ -224,127 +224,97 @@ const Image = [
 // --------------------------------------------------------------------
 // --------------------------------------------------------------------
 // --------------------------------------------------------------------
-// app.get("/roles", (req, res, next) => {
-//     res.json(Roles);
-// });
-// app.get("/roles/:id", (req, res, next) => {
-//     const id = +req.params.id;
-//     const index = findBookIndex(id);
-//     if(index !== -1) {
-//         res.json(Roles[index]);
-//     } else {
-//         res.status(404).json({message: 'Not found'});
-//     }
-// });
-//
-// app.post("/roles", (req, res, next) => {
-//     const role = {
-//         id: (new Date()).getTime(),
-//         title: req.body.title,
-//         author: req.body.author,
-//         description: req.body.description
-//     };
-//     roles.push(role);
-//     res.json(role);
-// });
-//
-// app.delete("/roles/:id", (req, res, next) => {
-//     const id = +req.params.id;
-//     const index = findBookIndex(id);
-//     if(index !== -1) {
-//         roles.splice(index, 1);
-//         res.json({message: 'Book deleted', id: id});
-//     } else {
-//         res.status(404).json({message: 'Not found'});
-//     }
-// });
-//
-// app.put("/roles/:id", (req, res, next) => {
-//     const id = +req.params.id;
-//     const index = findBookIndex(id);
-//     if(index !== -1) {
-//         const role = roles[index];
-//         role.title = req.body.title;
-//         role.author = req.body.author;
-//         role.description = req.body.description;
-//         res.json(role);
-//     } else {
-//         res.status(404).json({message: 'Not found'});
-//     }
-// });
-//
-// function findBookIndex(id) {
-//     for(let i = 0; i < roles.length; i++) {
-//         if(roles[i].id === id) {
-//             return i;
-//         }
-//     }
-//     return -1;
-// }
 
-// _-------------------------------------------------------------------
+app.get("/products", (req, res, next) => {
+    res.json(Products);
+});
+app.get("/products/:id", (req, res, next) => {
+    const id = +req.params.id;
+    const index = findProductIndex(id);
+    if(index !== -1) {
+        res.json(Products[index]);
+    } else {
+        res.status(404).json({message: 'Not found'});
+    }
+});
 
-// app.get("/products", (req, res, next) => {
-//     res.json(Products);
-// });
-// app.get("/products/:id", (req, res, next) => {
-//     const id = +req.params.id;
-//     const index = findProductIndex(id);
-//     if(index !== -1) {
-//         res.json(Products[index]);
-//     } else {
-//         res.status(404).json({message: 'Not found'});
-//     }
-// });
-//
-// app.post("/products/create", (req, res, next) => {
-//     const product = {
-//         id: (new Date()).getTime(),
-//         title: req.body.title,
-//         author: req.body.author,
-//         description: req.body.description
-//     };
-//     product.push(role);
-//     res.json(role);
-// });
-//
-// app.delete("/products/:id/delete", (req, res, next) => {
-//     const id = +req.params.id;
-//     const index = findProductIndex(id);
-//     if(index !== -1) {
-//         Products.splice(index, 1);
-//         res.json({message: 'Book deleted', id: id});
-//     } else {
-//         res.status(404).json({message: 'Not found'});
-//     }
-// });
-//
-// app.put("/products/:id/update", (req, res, next) => {
-//     const id = +req.params.id;
-//     const index = findArrayIndex(id);
-//     if(index !== -1) {
-//         const role = roles[index];
-//         role.title = req.body.title;
-//         role.author = req.body.author;
-//         role.description = req.body.description;
-//         res.json(role);
-//     } else {
-//         res.status(404).json({message: 'Not found'});
-//     }
-// });
-//
-// function findProductIndex(id) {
-//     for(let i = 0; i < Prodcuts.length; i++) {
-//         if(Prodcuts[i].id === id) {
-//             return i;
-//         }
-//     }
-//     return -1;
-// }
+app.post("/products/create", (req, res, next) => {
+    const product = {
+        id: (new Date()).getTime(),
+        name: req.body.name,
+        location: req.body.location,
+        price: req.body.price,
+        status: req.body.status,
+        // product.Detail = req.body.Detail,
+        Detail: {
+            id: 1,
+            Room: 1,
+            Pool: true,
+            garden: true,
+            Balcony: true,
+            Types: {
+                id: 1,
+                name: 'nha pho'
+            }
+        }
+    };
+    Products.push(product);
+    res.json(product);
+});
 
-// -------------------------------Account-------------------
-// -------------------------------Account-------------------
-// -------------------------------Account-------------------
+app.delete("/products/:id/delete", (req, res, next) => {
+    const id = +req.params.id;
+    const index = findProductIndex(id);
+    if(index !== -1) {
+        Products.splice(index, 1);
+        res.json({message: 'Product deleted', id: id});
+    } else {
+        res.status(404).json({message: 'Not found'});
+    }
+});
+
+app.put("/products/:id/update", (req, res, next) => {
+    const id = +req.params.id;
+    const index = findProductIndex(id);
+    if(index !== -1) {
+        const product = Products[index];
+        product.name = req.body.name,
+        product.location = req.body.location,
+        product.price = req.body.price,
+        product.status = req.body.status,
+        // product.Detail = req.body.Detail,
+        product.Detail = {
+            id: 1,
+            Room: 1,
+            Pool: true,
+            garden: true,
+            Balcony: true,
+            Types: {
+                id: 1,
+                name: 'nha pho'
+        }
+    },
+    res.json(product);
+    } else {
+        res.status(404).json({message: 'Not found'});
+    }
+});
+
+function findProductIndex(id) {
+    for(let i = 0; i < Products.length; i++) {
+        if(Products[i].id === id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+// -------------------------------Account--------------------------------------
+// -------------------------------Account--------------------------------------
+// -------------------------------Account--------------------------------------
+// -------------------------------Account--------------------------------------
+// -------------------------------Account--------------------------------------
+// -------------------------------Account--------------------------------------
 
 app.get("/accounts", (req, res, next) => {
     res.json(Accounts);
