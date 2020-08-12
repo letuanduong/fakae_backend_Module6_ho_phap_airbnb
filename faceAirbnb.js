@@ -353,7 +353,7 @@ app.get("/accounts/:id", (req, res, next) => {
     }
 });
 
-app.post("/accounts", (req, res, next) => {
+app.post("/create", (req, res, next) => {
     const account = {
         id: (new Date()).getTime(),
         title: req.body.title,
@@ -364,7 +364,7 @@ app.post("/accounts", (req, res, next) => {
     res.json(account);
 });
 
-app.delete("/accounts/:id", (req, res, next) => {
+app.delete("/accounts/:id/delete", (req, res, next) => {
     const id = +req.params.id;
     const index = findAccountIndex(id);
     if(index !== -1) {
@@ -375,7 +375,7 @@ app.delete("/accounts/:id", (req, res, next) => {
     }
 });
 
-app.put("/accounts/:id", (req, res, next) => {
+app.put("/accounts/:id/update", (req, res, next) => {
     const id = +req.params.id;
     const index = findArrayIndex(id);
     if(index !== -1) {
